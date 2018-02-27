@@ -1,0 +1,23 @@
+{
+  "name": "todo-app-with-nej",
+  "version": "1.0.0",
+  "description": "a todo app with nej",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Claiyre/todo-app-with-nej.git"
+  },
+  "keywords": [
+    "todo",
+    "nej"
+  ],
+  "author": "Claiyre",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Claiyre/todo-app-with-nej/issues"
+  },
+  "homepage": "https://github.com/Claiyre/todo-app-with-nej#readme"
+}
