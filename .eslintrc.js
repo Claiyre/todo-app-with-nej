@@ -1,6 +1,10 @@
 module.exports = {
     "env": {
-        "es6": true
+        "browser": true
+    },
+    "globals": {
+        "NEJ": false,
+        "define": false
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -9,7 +13,7 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            2
+            4
         ],
         "linebreak-style": [
             "error",
@@ -24,5 +28,6 @@ module.exports = {
             "never"
         ],
         "no-console": "off",
+        "no-unused-vars": ["warn"]
     }
 };
