@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/index.css' />
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" name="input" id="input" placeholder="输入todo，按回车保存" />
+      <div id="list">
+      </div>
+      <ul id="filter">
+        <li>All</li>
+        <li>To do</li>
+        <li>Done</li>
+      </ul>
+      <button id="delete-all">Clear all</button>
+    </div>
+    <div class="template-box" style="display: none">
+      <textarea name="jst" id="tab-list">
+        <ul>
+          {list todoList as l}
+            <li class=${l.done ? 'done' : 'notDone'}>
+              {if l.done}
+                <input type="checkbox" class="check-done" checked index=${l.id} done="true">
+              {else}
+                <input type="checkbox" class="check-done" index=${l.id}>
+              {/if}
+              ${l.text} <span class="delete" index=${l.id} alt="delete">-</span>
+            </li>
+          {/list}
+        </ul>
+      </textarea>
+    </div>
+
+    <script src="./js/nej/src/define.js?pro=./"></script>
+    <script src="/js/pro/index.js"></script>
+  </body>
+</html>

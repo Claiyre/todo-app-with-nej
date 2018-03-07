@@ -1,6 +1,7 @@
 module.exports = {
     "env": {
-        "browser": true
+        "browser": true,
+        "node": true
     },
     "globals": {
         "NEJ": false,
@@ -28,6 +29,7 @@ module.exports = {
             "never"
         ],
         "no-console": "off",
-        "no-unused-vars": ["warn"]
+        "no-unused-vars": ["warn"],
+        "linebreak-style": ["warn", "unix"]
     }
 };
