@@ -1,8 +1,4 @@
-function add(){
-    console.log('Great!')
-}
-
-var f=function(){
+var f=function(_tol, _tab, util){
     var _ = NEJ.P,
         _e = _('nej.e'),    // 节点接口
         _v = _('nej.v'),    // 事件接口
@@ -11,6 +7,29 @@ var f=function(){
         _p = _('nej.ut')
     var allList = []
     var _tabIndex, targetList = [], _listTpl = _e._$addHtmlTemplate('tab-list', true)
+
+    // 封装的实用函数
+    var ajax = function (url, method, params){
+        return new Promise((resolve, reject) => {
+            _j._$request(url, {
+                sync:true,
+                type:'json',
+                query:params,
+                method:method,
+                timeout:3000,    // 超时检测
+                cookie: true,
+                mode:0||1||2||3,
+                onload:function(_data){
+                    resolve(_data)
+                },
+                onerror:function(_error){
+                    alert('err code:' + _error.data + ' mes:' + _error.message)
+                    // reject(_error)
+                }
+            })
+        })
+        
+    }
     //解析模板
     _e._$parseTemplate('template-box')
     // 使用tab控件
@@ -80,8 +99,12 @@ var f=function(){
         changeListView()
     })
 
+
+    
+
 }
 
 define([
     '{lib}util/template/tpl.js',
-    '{lib}util/tab/tab.js'], f)
+    '{lib}util/tab/tab.js',
+    './js/pro/util.js'], f)
