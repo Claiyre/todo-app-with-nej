@@ -38,7 +38,6 @@ router.post('/login', function(req, res, next) {
 })
 
 router.get('/getList', function(req, res, next) {
-    // log(chalk.blue(req.path, req.cookies.name))
     db.getList({name: req.cookies.name}).then((data) => {
         res.json({
             code: 200,
@@ -50,29 +49,41 @@ router.get('/getList', function(req, res, next) {
 })
 
 router.post('/addList', function(req, res, next) {
-    // log(chalk.blue(req.path, req.query.id, req.query.text, req.query.done))
     var param = {
         id: parseInt(req.query.id),
         text: req.query.text,
         done: (req.query.done === 'false' || req.query.done === false) ? false : true
     }
     db.addList({name: req.cookies.name, todo: param}).then((data) => {
-        if(data) res.json({
-            code: 200,
-            msg: '添加list成功'
-        })
+        if(data === true) {
+            res.json({
+                code: 200,
+                msg: '添加成功'
+            })
+        } else {
+            res.json({
+                code: 500,
+                msg: data
+            })
+        }
     }).catch((err) => {
         res.json(err)
     })
 })
 router.post('/delete', function(req, res, next) {
-    log(chalk.blue(req.path, req.query))
     var param = Object.assign({name: req.cookies.name}, req.query)
     db.deleteList(param).then((data) => {
-        if(data) res.json({
-            code: 200,
-            msg: '已删除list'
-        })
+        if(data === true) {
+            res.json({
+                code: 200,
+                msg: '已删除list'
+            })
+        } else {
+            res.json({
+                code: 500,
+                msg: data
+            })
+        }
     }).catch((err) => {
         res.json(err)
     })
@@ -86,7 +97,6 @@ router.post('/delete', function(req, res, next) {
 //     nowValue: 'xx'
 // }
 router.post('/change', function(req, res, next) {
-    log(chalk.blue(req.path, req.query))
     var query = req.query
     // 经nej的ajax函数转换后的query的value都为字符串，此处应注意把done转换为Boolean,id转换为Int
     var param = {
@@ -104,12 +114,18 @@ router.post('/change', function(req, res, next) {
         param.newTodo.text = query.nowValue
     }
     // param.newTodo[query.changeKey] = query.nowValue
-    console.log(param)
     db.changeList(param).then((data) => {
-        if(data) res.json({
-            code: 200,
-            msg: '更改成功'
-        })
+        if(data === true) {
+            res.json({
+                code: 200,
+                msg: '更改成功'
+            })
+        } else {
+            res.json({
+                code: 500,
+                msg: data
+            })
+        }
     }).catch((err) => {
         res.json(err)
     })

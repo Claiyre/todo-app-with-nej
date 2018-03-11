@@ -2,7 +2,7 @@
  * @Author: mayingying 
  * @Date: 2018-03-09 21:20:08 
  * @Last Modified by: mayingying
- * @Last Modified time: 2018-03-10 19:30:42
+ * @Last Modified time: 2018-03-11 15:09:55
  * #Desc the CURD operation of mongodb
  */
 
@@ -69,27 +69,17 @@ module.exports = {
                 }
             })
         })
-        // return new Promise((resolve, reject) => {
-        //     connectDB((col, db)=>{
-        //         col.insertOne(data, (err, res) => {
-        //             if(err) reject(err)
-        //             resolve(true)
-        //             db.close()
-        //         })
-        //     })
-        // })
     },
     /**
      * @param {Object} data: { name: 'user name'}
      */
     getList: function(data) {
-        log(chalk.blue('get list'), data)
         var where = {name: data.name}
         return connectDB((col, db, resolve, reject) => {
             col.find(where).toArray((err, res) => {
                 if(err) reject(err)
-                log(chalk.blue(res))
                 resolve((res.length > 0 && res[0].list) ? res[0].list : [])
+                log((res.length > 0 && res[0].list) ? res[0].list : [])
                 db.close()
             })
         })
@@ -98,14 +88,17 @@ module.exports = {
      * @param {Object} data: { name: 'user name', todo: {text: 'xxx', done: false, id: x}}
      */
     addList: function(data) {
-        log(chalk.blue('add list'))
-        log(data)
         var where = {name: data.name}
         return connectDB((col, db, resolve, reject) => {
             col.updateOne(where, {'$push': { list: data.todo}}, function(err, res){
+                res = res.result
                 if(err) reject(err)
                 log(chalk.blue(res))
-                resolve(true)
+                if(res.n === 1 && res.nModified == 1 && res.ok === 1) {
+                    resolve(true)
+                } else {
+                    resolve('database error')
+                }
                 db.close()
             })
         })
@@ -117,9 +110,14 @@ module.exports = {
         var where = {name: data.name, list: data.oldTodo}
         return connectDB((col, db, resolve, reject) => {
             col.updateOne(where, {$set: { 'list.$': data.newTodo}}, function(err, res){
+                res = res.result
                 if(err) reject(err)
                 log(chalk.blue(res))
-                resolve(true)
+                if(res.n === 1 && res.nModified == 1 && res.ok === 1) {
+                    resolve(true)
+                } else {
+                    resolve('database error')
+                }
                 db.close()
             })
         })
@@ -136,7 +134,12 @@ module.exports = {
             col.updateOne(where, update, (err, res) => {
                 if(err) reject(err)
                 log(chalk.blue(res))
-                resolve(true)
+                res = res.result
+                if(res.n === 1 && res.nModified == 1 && res.ok === 1) {
+                    resolve(true)
+                } else {
+                    resolve('database error')
+                }
                 db.close()
             })
         })

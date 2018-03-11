@@ -2,7 +2,7 @@
  * @Author: mayingying 
  * @Date: 2018-03-11 13:46:43 
  * @Last Modified by: mayingying
- * @Last Modified time: 2018-03-11 14:27:33
+ * @Last Modified time: 2018-03-11 15:03:58
  */
 
 var f=function(_tol, _tab, util){
@@ -71,6 +71,10 @@ var f=function(_tol, _tab, util){
     _v._$addEvent('input', 'keyup', function(_event) {
         if (parseInt(_event.keyCode) !== 13) return
         var target = _event.target
+        if(!target.value) {
+            alert('输入的todo不能为空')
+            return
+        }
         var param = {
             text: target.value,
             done: false,

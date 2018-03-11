@@ -43,9 +43,4 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500)
     res.render('error')
 })
-app.use(function(req, res, next) {
-    console.log(chalk.blue(req.path, req.cookies.name))
-    console.log(req.query)
-    next()
-})
 module.exports = app
