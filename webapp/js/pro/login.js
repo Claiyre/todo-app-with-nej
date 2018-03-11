@@ -34,7 +34,7 @@ var f = function() {
             alert('用户名或密码不能为空')
             return
         }
-        ajax('/login', 'post', param).then((res) => {
+        ajax('/login/to', 'post', param).then((res) => {
             if(res.code !== 200) {
                 alert(res.msg)
             } else {
