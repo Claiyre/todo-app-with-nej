@@ -2,7 +2,7 @@
  * @Author: mayingying 
  * @Date: 2018-03-11 13:46:43 
  * @Last Modified by: mayingying
- * @Last Modified time: 2018-03-11 15:03:58
+ * @Last Modified time: 2018-03-11 17:33:57
  */
 
 var f=function(_tol, _tab, util){
@@ -27,7 +27,12 @@ var f=function(_tol, _tab, util){
                 cookie: true,
                 mode:0||1||2||3,
                 onload:function(_data){
-                    resolve(_data)
+                    if(_data.code === 401) {
+                        alert(_data.msg)
+                        location.href = '/login'
+                    } else {
+                        resolve(_data)
+                    }
                 },
                 onerror:function(_error){
                     alert('err code:' + _error.data + ' mes:' + _error.message)

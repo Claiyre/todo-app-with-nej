@@ -23,9 +23,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(lessMiddleware(path.join(__dirname, 'webapp')))
 app.use(express.static(path.join(__dirname, 'webapp')))
-
+app.all(/(add)|(delete)|(change)/, function(req, res, next) {
+    if(!req.cookies.name) {
+        res.json({
+            code: 401,
+            msg: '请先登录'
+        })
+    } else {
+        next()
+    }
+})
 app.use('/', index)
 app.use('/login', login)
+
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //     var err = new Error('Not Found')
