@@ -4,10 +4,14 @@ var router = express.Router()
 var db = require('../db/index')
 
 router.get('/', function(req, res, next) {
-    var username = req.cookies.name
-
+    var username = req.cookies.name, action
+    if(/login/.test(req.originalUrl)) {
+        action = '登录'
+    } else if(/logup/.test(req.originalUrl)) {
+        action = '注册并登陆'
+    }
     res.clearCookie('name')
-    res.render('login', {name: username})
+    res.render('login', {name: username, action})
 })
 
 router.post('/to', function(req, res, next) {
