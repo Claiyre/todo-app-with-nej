@@ -2,7 +2,7 @@
  * @Author: mayingying 
  * @Date: 2018-03-11 13:46:43 
  * @Last Modified by: mayingying
- * @Last Modified time: 2018-03-11 17:33:57
+ * @Last Modified time: 2018-03-11 23:12:24
  */
 
 var f=function(_tol, _tab, util){
@@ -99,6 +99,10 @@ var f=function(_tol, _tab, util){
     // 删除、编辑、选中等事件
     _v._$addEvent(_element, 'click', function(_event) {
         var className = _event.target.className
+        if(!/(delete)|(check-done)/.test(className)){
+            return
+        }
+
         var index = _e._$attr(_event.target, 'index')
         index = parseInt(index)
         var param = {id: index}, url, list

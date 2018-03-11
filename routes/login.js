@@ -35,7 +35,7 @@ router.post('/to', function(req, res, next) {
             res.json(err)
         })
     } else {
-        res.status(400).json({
+        res.json({
             code: 400,
             msg: '用户名或密码的格式错误，应为4-16位的英文字母或数字'
             // msg: 'user name or password format is wrong. It should be ^[a-zA-Z0-9]{5,16}$'
