@@ -7,7 +7,7 @@ var lessMiddleware = require('less-middleware')
 var chalk = require('chalk')
 
 var index = require('./routes/index')
-// var users = require('./routes/users')
+var login = require('./routes/login')
 
 var app = express()
 
@@ -25,7 +25,7 @@ app.use(lessMiddleware(path.join(__dirname, 'webapp')))
 app.use(express.static(path.join(__dirname, 'webapp')))
 
 app.use('/', index)
-
+app.use('/login', login)
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //     var err = new Error('Not Found')

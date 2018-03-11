@@ -14,7 +14,16 @@ body {
     margin: 0 auto;
     padding-top: 40px;
 }
-#input {
+.container-login {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 100px;
+    text-align: center
+}
+.container-login > input {
+    margin-bottom: 10px;
+}
+#input, #username, #password, #login {
     border: none;
     height: 50px;
     line-height: 50px;
@@ -23,6 +32,9 @@ body {
     padding: 0 15px;
     width: 100%;
     box-sizing: border-box;
+}
+#login {
+    background: #aee8e6
 }
 #list>ul {
     list-style-type: none;
@@ -39,6 +51,7 @@ body {
     text-align: center;
     height: 30px;
     line-height: 30px;
+    border-radius: 5px;
 }
 .done, .notDone {
     line-height: 40px;
@@ -63,27 +76,31 @@ body {
     width: 25px;
     background: transparent;
 }
+.done:hover  .delete, .notDone:hover .delete{
+    display: inline-block
+}
 .delete {
-    display: inline-block;
+    display: none;
     float: right;
-    font-size: 28px;
-    height: 30px;
-    width: 30px;
+    font-size: 32px;
+    height: 40px;
+    width: 40px;
     text-align: center;
-    line-height: 30px;
+    line-height: 40px;
     cursor: pointer
 }
 .delete:hover {
-    background: #ffbd39;
-    border-radius: 15px;
+    background: #aee8e6;
+    border-radius: 20px;
 }
 
 #delete-all {
-    background: #aab1c3;
+    background: #e4f16d;
     height: 30px;
     line-height: 30px;
-    border: none
+    border: none;
+    border-radius: 5px;
 }
 .js-selected {
-    background: #e4f16d !important;
+    background: #aee8e6 !important;
 }

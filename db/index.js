@@ -2,7 +2,7 @@
  * @Author: mayingying 
  * @Date: 2018-03-09 21:20:08 
  * @Last Modified by: mayingying
- * @Last Modified time: 2018-03-11 15:09:55
+ * @Last Modified time: 2018-03-11 15:54:44
  * #Desc the CURD operation of mongodb
  */
 
@@ -54,9 +54,13 @@ module.exports = {
                 if(err) {
                     reject(err)
                     db.close()
-                } else if(res.length > 0 && res[0].password === data.password) {
-                    // 登陆成功
-                    resolve(true)
+                } else if(res.length > 0) {
+                    if(res[0].password === data.password) {
+                        // 登陆成功
+                        resolve(true)
+                    } else {
+                        resolve('密码错误')
+                    }
                     db.close()
                 } else if(res.length === 0){
                     // 添加用户并登陆
