@@ -31,6 +31,6 @@ A todo web application with nej
 |-db        封装的数据路连接、操作等函数
 |-app.js    启动服务
 |-README.md 
-|-... 一些配置文件
+|-... 相关配置文件
 
 ```
